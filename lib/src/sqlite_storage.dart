@@ -345,7 +345,7 @@ abstract class FlutterDownloaderPersistentStorage implements PersistentStorage {
 
   /// Extract the BaseDirectory and subdirectory from the [savedDir] string
   ///
-  /// If unable to extract, the subdirectory will be null
+  /// If unable to extract, the savedDir is assumed to be the subdirectory
   Future<(BaseDirectory, String?)> getDirectories(String savedDir,
       {isRetry = false}) async {
     // Note: the order of directories matters, as some directories are
@@ -392,7 +392,7 @@ abstract class FlutterDownloaderPersistentStorage implements PersistentStorage {
         return getDirectories(newSavedDir, isRetry: true);
       }
     }
-    return (BaseDirectory.applicationDocuments, null);
+    return (BaseDirectory.applicationDocuments, savedDir);
   }
 
   /// Returns the subdirectory of the given [directory] within [savedDir]
